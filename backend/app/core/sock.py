@@ -1,6 +1,6 @@
 from typing import List, Tuple
 import numpy as np
-from services import SockService
+from app.services.sock_service import SockService
 
 sock_service = SockService
 
@@ -25,7 +25,7 @@ class Sock:
         )
         return stitch_count
 
-    def get_heel_stitch_section_layout(self) -> Tuple[int]:
+    def get_heel_stitch_section_layout(self) -> Tuple[int, int, int]:
         """
         Construct the heel layout.
         """
@@ -66,4 +66,4 @@ class Sock:
 
 
 sock1 = Sock(size="37", yarn_weight="fingering")
-# print(sock1.full_pattern)
+print(sock1.heel_stitch_sections)
