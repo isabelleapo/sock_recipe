@@ -1,4 +1,4 @@
-from sqlalchemy import Float, Column, Enum, Integer, ForeignKey
+from sqlalchemy import Float, Column, Enum, Integer, UniqueConstraint
 from .base import Base
 
 class ShoeSize(Base):
@@ -24,7 +24,9 @@ class StitchCount(Base):
     """
     """
     __tablename__="stitchcount"
-    knit_size = Column(Enum('B', 'T', 'C', 'S', 'M', 'L', 'XL',  name='knit_size'),ForeignKey('shoesize.knit_size'), primary_key=True, nullable=False)
+    __tableargs__= (UniqueConstraint('knit_size', name='unique_knit_size'),)
+
+    knit_size = Column(Enum('B', 'T', 'C', 'S', 'M', 'L', 'XL',  name='knit_size'), primary_key=True, nullable=False)
     yarn_weight = Column(Enum('Fingering', 'DK', 'Worsted', name='yarn_weight'), nullable=False)
     stitch_count = Column(Integer, nullable=False)
 
