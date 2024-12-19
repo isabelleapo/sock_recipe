@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routes.sock import create_sock_router
+from .routes.sock import create_sock_router
 def create_application()->FastAPI:
     sock_router = create_sock_router()
 
@@ -7,5 +7,6 @@ def create_application()->FastAPI:
     app.include_router(sock_router)
     return app
 
-print('hi')
+from .models import recreate_postgres_tables
+recreate_postgres_tables()
 app = create_application()

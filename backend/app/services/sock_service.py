@@ -16,6 +16,7 @@ pattern_parts = {
 class SockService:
     def __init__(self):
         # probs db connection later
+        
         pass
 
     def get_stitch_count_from_db(shoe_size: str, yarn_weight: str) -> int:
