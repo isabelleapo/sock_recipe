@@ -19,8 +19,8 @@ class SockService:
         
         pass
 
-    def get_stitch_count_from_db(shoe_size: str, yarn_weight: str) -> int:
+    async def get_stitch_count_from_db(shoe_size: str, yarn_weight: str) -> int:
         return shoe_size_db[shoe_size][yarn_weight]
 
-    def get_pattern_part_from_db(pattern_part: str) -> str:
+    async def get_pattern_part_from_db(pattern_part: str) -> str:
         return pattern_parts[pattern_part]

@@ -15,12 +15,12 @@ class Sock:
         self.possible_cuffs = self.get_possible_cuffs()
         self.full_pattern = self.get_pattern()
 
-    def get_stitch_count(self) -> int:
+    async def get_stitch_count(self) -> int:
         """
         A function that call the shoe size database and yarn weight database to return a number of stitches.
         e.g. Shoe size 37 = women's medium + fingering weight yarn = 56 stitch count
         """
-        stitch_count = sock_service.get_stitch_count_from_db(
+        stitch_count = await sock_service.get_stitch_count_from_db(
             self.size, self.yarn_weight
         )
         return stitch_count
@@ -50,8 +50,8 @@ class Sock:
             cuff_rib_patterns.append("2x2")
         return cuff_rib_patterns
 
-    def get_and_format_pattern_part(self, pattern_part: str) -> str:
-        pattern = sock_service.get_pattern_part_from_db(pattern_part)
+    async def get_and_format_pattern_part(self, pattern_part: str) -> str:
+        pattern = await sock_service.get_pattern_part_from_db(pattern_part)
         formatted_pattern_part = pattern.format(**vars(self))
         return formatted_pattern_part
 

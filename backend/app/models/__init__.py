@@ -1,2 +1,2 @@
-from .base import Base, recreate_postgres_tables
+from .base import Base
 from .sock import ShoeSize, StitchCount
