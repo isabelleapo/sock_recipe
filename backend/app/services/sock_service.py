@@ -1,5 +1,6 @@
 from app.clients.db import DatabaseClient
 from sqlalchemy import select
+
 # fake database
 
 shoe_size_db = {
@@ -20,8 +21,21 @@ class SockService:
         self.database_client = database_client
 
     async def get_stitch_count_from_db(self, shoe_size: str, yarn_weight: str) -> int:
-        query = select(self.database_client.stitchcount).where(self.database_client.stitchcount.c.shoe_size == shoe_size).where(self.database_client.stitchcount.c.yarn_weight == yarn_weight)
-        return shoe_size_db[shoe_size][yarn_weight]
+        query = (
+            select(self.database_client.stitchcount)
+            .where(self.database_client.stitchcount.c.shoe_size == shoe_size)
+            .where(self.database_client.stitchcount.c.yarn_weight == yarn_weight)
+        )
+
+        stitch_count = self.database_client.get_all(query=query)
+
+        return stitch_count
 
     async def get_pattern_part_from_db(self, pattern_part: str) -> str:
-        return pattern_parts[pattern_part]
+        query = select(self.database_client.patternpart).where(
+            self.database_client.patternpart.c.pattern_part == pattern_part
+        )
+
+        section_pattern = self.database_client.get_all(query=query)
+
+        return section_pattern

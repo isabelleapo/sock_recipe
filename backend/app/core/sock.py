@@ -2,6 +2,7 @@ from typing import List, Tuple
 import numpy as np
 from app.main import sock_service
 
+
 # everything calculated in cm - european shoe sizes are unisex
 class Sock:
     def __init__(self, size, yarn_weight) -> None:

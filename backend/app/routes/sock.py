@@ -11,7 +11,7 @@ def create_sock_router() -> APIRouter:
     async def get_heel_start_length(
         row_gauge: int | float,
         foot_length: int | float,
-        size: str, 
+        size: str,
         yarn_weight: str,
     ) -> float:
         sock = Sock(size=size, yarn_weight=yarn_weight)
@@ -22,12 +22,15 @@ def create_sock_router() -> APIRouter:
         return heel_start_length
 
     @sock_router.get("/heel-stitch-sections/")
-    async def get_heel_stitch_sections(size: str, yarn_weight: str) -> Tuple[int, int, int]:
+    async def get_heel_stitch_sections(
+        size: str, yarn_weight: str
+    ) -> Tuple[int, int, int]:
         """
         Construct the heel layout.
         """
         sock = Sock(size=size, yarn_weight=yarn_weight)
         return sock.heel_stitch_sections
+
     @sock_router.get("/full-pattern/")
     async def get_full_pattern(size: str, yarn_weight: str) -> PlainTextResponse:
         """

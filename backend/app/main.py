@@ -6,7 +6,8 @@ from app.services.sock_service import SockService
 
 sock_service = None
 
-def create_application()->FastAPI:
+
+def create_application() -> FastAPI:
     global sock_service
     config = Config()
     tables = ["shoesize", "stitchcount"]
