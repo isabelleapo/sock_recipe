@@ -1,9 +1,6 @@
 from typing import List, Tuple
 import numpy as np
-from app.services.sock_service import SockService
-
-sock_service = SockService
-
+from app.main import sock_service
 
 # everything calculated in cm - european shoe sizes are unisex
 class Sock:

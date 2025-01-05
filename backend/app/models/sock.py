@@ -24,7 +24,7 @@ class StitchCount(Base):
     """
     """
     __tablename__="stitchcount"
-    __tableargs__= (UniqueConstraint('knit_size', name='unique_knit_size'),)
+    __table_args__= (UniqueConstraint('knit_size', name='unique_knit_size'),)
 
     knit_size = Column(Enum('B', 'T', 'C', 'S', 'M', 'L', 'XL',  name='knit_size'), primary_key=True, nullable=False)
     yarn_weight = Column(Enum('Fingering', 'DK', 'Worsted', name='yarn_weight'), nullable=False)
