@@ -4,13 +4,14 @@ from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import Session
 from sqlalchemy.sql.expression import Select
 from sqlalchemy.engine import Row
+import os
 
-host = "postgresql://isabelle:QQyB2czq3!!?@localhost:5432/sock_recipe_db"
+db_uri = os.getenv("DB_URI")
 
 class DatabaseClient:
     def __init__(self, tables: Optional[list[str]]) -> None:
         self.tables = tables
-        self.engine = create_engine(host, future=True)
+        self.engine = create_engine(db_uri, future=True)
         self.session = Session(bind=self.engine, future=True)
         self.metadata = MetaData()
         self._reflect_metadata()  # doesnt work if primary key missing - revisit this lesson 124

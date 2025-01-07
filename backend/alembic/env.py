@@ -5,6 +5,10 @@ from sqlalchemy import pool
 
 from alembic import context
 
+#to read db from env variables
+import os
+
+
 #Note we added
 
 from app.models import Base
@@ -31,6 +35,10 @@ target_metadata = Base.metadata
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
+
+# Set the SQLAlchemy URL using the environment variable
+config.set_main_option('sqlalchemy.url', os.getenv('DATABASE_URL'))
+
 
 
 def run_migrations_offline() -> None:
