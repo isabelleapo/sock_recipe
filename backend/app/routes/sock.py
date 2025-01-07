@@ -2,9 +2,10 @@ from fastapi import APIRouter
 from fastapi.responses import PlainTextResponse
 from app.core.sock import Sock
 from typing import Tuple
+from app.clients.db import DatabaseClient
 
 
-def create_sock_router() -> APIRouter:
+def create_sock_router(database_client: DatabaseClient) -> APIRouter:
     sock_router = APIRouter()
 
     @sock_router.get("/heel-start-length/")
@@ -14,7 +15,7 @@ def create_sock_router() -> APIRouter:
         size: str,
         yarn_weight: str,
     ) -> float:
-        sock = Sock(size=size, yarn_weight=yarn_weight)
+        sock = Sock(database_client=database_client, size=size, yarn_weight=yarn_weight)
         side_heel_section, _, _ = sock.heel_stitch_sections
         no_heel_rows = side_heel_section * 2
         heel_length = no_heel_rows / row_gauge
@@ -28,7 +29,7 @@ def create_sock_router() -> APIRouter:
         """
         Construct the heel layout.
         """
-        sock = Sock(size=size, yarn_weight=yarn_weight)
+        sock = Sock(database_client=database_client, size=size, yarn_weight=yarn_weight)
         return sock.heel_stitch_sections
 
     @sock_router.get("/full-pattern/")
@@ -36,7 +37,7 @@ def create_sock_router() -> APIRouter:
         """
         Get full pattern for sock pattern
         """
-        sock = Sock(size=size, yarn_weight=yarn_weight)
+        sock = Sock(database_client=database_client, size=size, yarn_weight=yarn_weight)
         return sock.full_pattern
 
     return sock_router

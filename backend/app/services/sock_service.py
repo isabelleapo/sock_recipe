@@ -32,7 +32,7 @@ class SockService:
         return stitch_count
 
     async def get_pattern_part_from_db(self, pattern_part: str) -> str:
-        query = select(self.database_client.patternpart).where(
+        query = select(self.database_client.pattern).where(
             self.database_client.patternpart.c.pattern_part == pattern_part
         )
 
